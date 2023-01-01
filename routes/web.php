@@ -32,3 +32,8 @@ Route::get('/show', function () {
 Route::get('/edit', function () {
     return view('edit');
 });
+
+Route::post('/store', function (Request $request) {
+    $image = $request::file('image');
+    dd($image->store('uploads'));
+});
