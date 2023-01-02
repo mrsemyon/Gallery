@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12 mx-auto">
-            <img style="width:50%" src="/laravel.jpg" alt="Laravel" class="img-thumbnail">
+            <img style="width:50%" src="/{{$image}}" alt="Laravel" class="img-thumbnail">
         </div>
     </div>
 </div>
