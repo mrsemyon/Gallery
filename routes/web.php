@@ -15,7 +15,11 @@ use Illuminate\Support\Facades\DB;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $images = DB::table('images')
+            ->select('*')
+            ->get();
+    $images = $images->pluck('image')->all();
+    return view('welcome', ['images' => $images]);
 });
 
 Route::get('/about', function () {
