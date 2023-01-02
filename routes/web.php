@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\DB;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,5 +36,11 @@ Route::get('/edit', function () {
 
 Route::post('/store', function (Request $request) {
     $image = $request::file('image');
-    dd($image->store('uploads'));
+    $filename = $image->store('uploads');
+
+    DB::table('images')->insert(
+        ['image' => $filename]
+    );
+
+    return redirect('/');
 });
