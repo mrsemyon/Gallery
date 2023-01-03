@@ -15,83 +15,18 @@ use Illuminate\Support\Facades\Storage;
 |
 */
 
-Route::get('/', function () {
-    $images = DB::table('images')
-            ->select('*')
-            ->get();
-    $images = $images->all();
+Route::get('/', 'App\Http\Controllers\ImagesController@index');
 
-    return view('welcome', ['images' => $images]);
-});
+Route::get('/about', 'App\Http\Controllers\ImagesController@about');
 
-Route::get('/about', function () {
-    return view('about');
-});
+Route::get('/create', 'App\Http\Controllers\ImagesController@create');
 
-Route::get('/create', function () {
-    return view('create');
-});
+Route::post('/store', 'App\Http\Controllers\ImagesController@store');
 
-Route::get('/show/{id}', function ($id) {
-    $image = DB::table('images')
-    ->select('*')
-    ->where('id', $id)
-    ->first();
+Route::get('/show/{id}', 'App\Http\Controllers\ImagesController@show');
 
-    return view('show', ['image' => $image->image]);
-});
+Route::get('/edit/{id}', 'App\Http\Controllers\ImagesController@edit');
 
-Route::get('/edit/{id}', function ($id) {
-    $image = DB::table('images')
-    ->select('*')
-    ->where('id', $id)
-    ->first();
+Route::post('/update/{id}', 'App\Http\Controllers\ImagesController@update');
 
-    return view('edit', ['image' => $image]);
-});
-
-Route::post('/store', function (Request $request) {
-    $image = $request::file('image');
-    $filename = $image->store('uploads');
-
-    DB::table('images')->insert(
-        ['image' => $filename]
-    );
-
-    return redirect('/');
-});
-
-Route::post('/update/{id}', function (Request $request, $id) {
-    $image = DB::table('images')
-    ->select('*')
-    ->where('id', $id)
-    ->first();
-
-    Storage::delete($image->image);
-
-    $image = $request::file('image');
-    $filename = $image->store('uploads');
-
-    DB::table('images')
-    ->where('id', $id)
-    ->update(
-        ['image' => $filename]
-    );
-
-    return redirect('/');
-});
-
-Route::get('/delete/{id}' ,function ($id) {
-    $image = DB::table('images')
-    ->select('*')
-    ->where('id', $id)
-    ->first();
-
-    Storage::delete($image->image);
-
-    DB::table('images')
-    ->where('id', $id)
-    ->delete();
-
-    return redirect('/');
-});
+Route::get('/delete/{id}' ,'App\Http\Controllers\ImagesController@delete');
