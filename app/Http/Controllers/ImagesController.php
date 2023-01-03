@@ -17,10 +17,6 @@ class ImagesController extends Controller
         return view('welcome', ['images' => $images]);
     }
 
-    function about() {
-        return view('about');
-    }
-
     function create() {
         return view('create');
     }

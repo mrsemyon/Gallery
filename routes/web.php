@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Storage;
 
 Route::get('/', 'App\Http\Controllers\ImagesController@index');
 
-Route::get('/about', 'App\Http\Controllers\ImagesController@about');
+Route::get('/about', 'App\Http\Controllers\HomeController@about');
 
 Route::get('/create', 'App\Http\Controllers\ImagesController@create');
 
