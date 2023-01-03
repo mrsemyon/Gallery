@@ -9,7 +9,7 @@
                 <img src="{{$image->image}}" class="img-thumbnail" alt="Laravel">
                 <div class="row justify-content-center">
                     <a href="/show/{{$image->id}}"  type="button" class="m-2 btn btn-info">Info</a>
-                    <button type="button" class="m-2 btn btn-warning">Edit</button>
+                    <a href="/edit/{{$image->id}}"   type="button" class="m-2 btn btn-warning">Edit</a>
                     <button type="button" class="m-2 btn btn-danger">Delete</button>
                 </div>
             </div>
