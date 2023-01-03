@@ -10,7 +10,7 @@
                 <div class="row justify-content-center">
                     <a href="/show/{{$image->id}}"  type="button" class="m-2 btn btn-info">Info</a>
                     <a href="/edit/{{$image->id}}"   type="button" class="m-2 btn btn-warning">Edit</a>
-                    <button type="button" class="m-2 btn btn-danger">Delete</button>
+                    <a href="/delete/{{$image->id}}" onclick="return confirm('Are you sure?')" type="button" class="m-2 btn btn-danger">Delete</a>
                 </div>
             </div>
         @endforeach

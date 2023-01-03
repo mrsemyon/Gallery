@@ -20,6 +20,7 @@ Route::get('/', function () {
             ->select('*')
             ->get();
     $images = $images->all();
+
     return view('welcome', ['images' => $images]);
 });
 
@@ -36,6 +37,7 @@ Route::get('/show/{id}', function ($id) {
     ->select('*')
     ->where('id', $id)
     ->first();
+
     return view('show', ['image' => $image->image]);
 });
 
@@ -44,6 +46,7 @@ Route::get('/edit/{id}', function ($id) {
     ->select('*')
     ->where('id', $id)
     ->first();
+
     return view('edit', ['image' => $image]);
 });
 
@@ -74,6 +77,21 @@ Route::post('/update/{id}', function (Request $request, $id) {
     ->update(
         ['image' => $filename]
     );
+
+    return redirect('/');
+});
+
+Route::get('/delete/{id}' ,function ($id) {
+    $image = DB::table('images')
+    ->select('*')
+    ->where('id', $id)
+    ->first();
+
+    Storage::delete($image->image);
+
+    DB::table('images')
+    ->where('id', $id)
+    ->delete();
 
     return redirect('/');
 });
